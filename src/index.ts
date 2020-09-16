@@ -4,6 +4,7 @@ import { AddressInfo } from 'net';
 import { login } from './endpoints/login';
 import { signUp } from './endpoints/signUp';
 import { getAllUsers } from './endpoints/getAllUsers';
+import { getUser } from './endpoints/getUser';
 
 dotenv.config();
 
@@ -13,6 +14,7 @@ app.use(express.json());
 app.post('/user/signup', signUp);
 app.post('/user/login', login);
 app.get('/users', getAllUsers);
+app.get('/user/:id', getUser);
 
 const server = app.listen(process.env.PORT || 3000, () => {
   if(server) {
