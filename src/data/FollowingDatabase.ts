@@ -8,4 +8,11 @@ export default class FollowingDatabase extends BaseDatabase{
         await this.getConnection()
         .insert({ user_id, following_user_id }).into(this.table);
     }
+    
+    async deleteUserFollowing(id: string): Promise<void> {
+        await this.getConnection()
+        .delete()
+        .from(this.table)
+        .where({ user_id: id })
+    }
 }

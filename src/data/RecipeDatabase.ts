@@ -15,4 +15,18 @@ export  class RecipeDatabase extends BaseDatabase{
             BaseDatabase.destroyConnection();
         }
     }
+    
+    async deleteRecipe(id: string): Promise<void> {
+        await this.getConnection()
+        .delete()
+        .from(this.table)
+        .where({ id })
+    }
+    
+    async deleteAllUserRecipes(creatorId: string): Promise<void> {
+        await this.getConnection()
+        .delete()
+        .from(this.table)
+        .where({ creator_id: creatorId })
+    }
 }
