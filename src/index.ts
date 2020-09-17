@@ -7,15 +7,18 @@ import { getAllUsers } from './endpoints/getAllUsers';
 import { getUser } from './endpoints/getUser';
 import { createRecipe } from './endpoints/createRecipe';
 import {fallowUser} from './endpoints/followUser'
+import { getProfile } from './endpoints/getProfile';
+
 
 dotenv.config();
 
 const app = express();
 app.use(express.json());
 
+app.get('/users', getAllUsers);
 app.post('/user/signup', signUp);
 app.post('/user/login', login);
-app.get('/users', getAllUsers);
+app.get('/user/profile', getProfile);
 app.get('/user/:id', getUser);
 
 app.post('/user/recipe', createRecipe);
