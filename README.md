@@ -12,7 +12,7 @@
 - ~~Seguir usuário~~
 - ~~Deixar de seguir usuário~~
 - ~~Pegar feed de receitas~~
-- ~~Editar receita~~
-- ~~Deletar receita~~
-- ~~Deletar conta~~
+- Editar receita
+- Deletar receita
+- Deletar conta
 - ~~Refresh token~~
