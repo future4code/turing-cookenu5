@@ -6,6 +6,7 @@ import { signUp } from './endpoints/signUp';
 import { getAllUsers } from './endpoints/getAllUsers';
 import { getUser } from './endpoints/getUser';
 import { createRecipe } from './endpoints/createRecipe';
+import {fallowUser} from './endpoints/followUser'
 
 dotenv.config();
 
@@ -18,6 +19,8 @@ app.get('/users', getAllUsers);
 app.get('/user/:id', getUser);
 
 app.post('/user/recipe', createRecipe);
+
+app.post('/user/follow', fallowUser)
 
 const server = app.listen(process.env.PORT || 3000, () => {
   if(server) {
