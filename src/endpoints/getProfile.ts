@@ -4,14 +4,10 @@ import { UserDatabase } from '../data/UserDatabase';
 import { Authenticator } from '../services/Authenticator';
 import { HashManager } from '../services/HashManager';
 
-export const getUser = async (req: Request, res: Response) => {
+export const getProfile = async (req: Request, res: Response) => {
 
   try{
 
-    const userData = {
-      id: req.params.id,
-    }
-    
     const token = req.headers.authorization as string;
 
     const authenticator = new Authenticator();
@@ -22,7 +18,7 @@ export const getUser = async (req: Request, res: Response) => {
     }
 
     const userDatabase = new UserDatabase();
-    const user = await userDatabase.getUserById(userData.id);
+    const user = await userDatabase.getUserById(authenticationData.id);
 
     res.status(200).send({
       user
