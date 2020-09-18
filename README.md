@@ -15,4 +15,4 @@
 - Editar receita
 - Deletar receita
 - Deletar conta
-- ~~Refresh token~~
+- Refresh token
