@@ -11,6 +11,15 @@ export default class FollowingDatabase extends BaseDatabase{
         .insert({ user_id, following_user_id }).into(this.table);
     }
 
+    async getFollowingById(id: string): Promise<any> {
+        const result = await this.getConnection()
+        .select('following_user_id')
+        .from(this.table)
+        .where({id})
+
+        return result[0]
+    }
+
     async getFeedById(id: string): Promise<any> {
         const result = await this.getConnection().raw(`
         SELECT f.user_id, f.following_user_id, c.name, r.name, r.recipe_description, r.creation_date
@@ -21,6 +30,15 @@ export default class FollowingDatabase extends BaseDatabase{
         ON f.following_user_id = c.id
         WHERE f.user_id = "${id}"
         `);
+
+        return result[0]
+    }
+
+    async deleteFollowingById(id: string): Promise<any> {
+        const result = await this.getConnection()
+        .select('following_user_id')
+        .from(this.table)
+        .where({id})
 
         return result[0]
     }

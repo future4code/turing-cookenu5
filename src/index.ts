@@ -13,6 +13,7 @@ import { deleteRecipe } from './endpoints/deleteRecipe';
 import { refreshToken } from './endpoints/refreshToken';
 import { getFeed } from './endpoints/getFeed';
 import { getRecipe } from './endpoints/getRecipe';
+import { unfollowUser } from './endpoints/unfollowUser';
 
 
 dotenv.config();
@@ -31,6 +32,7 @@ app.get('/recipes/:recipeId', getRecipe);
 
 app.post('/user/recipe', createRecipe);
 app.post('/user/follow', fallowUser);
+app.post('/user/:id/unfollow', unfollowUser);
 
 app.delete('/user/:id/recipes/:recipeId/delete', deleteRecipe);
 app.delete('/user/:id/delete', deleteUser);
