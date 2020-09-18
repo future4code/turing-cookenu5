@@ -15,7 +15,20 @@ export  class RecipeDatabase extends BaseDatabase{
             BaseDatabase.destroyConnection();
         }
     }
-    
+
+    public async getRecipeById(id: string): Promise<any> {
+        try {
+            const result = await this.getConnection()
+            .select('name', 'recipe_description', 'creation_date')
+            .from(this.table)
+            .where({id})
+            return result[0]
+
+        } catch(err) {
+            console.log(err.message)
+        }
+    }
+
     async deleteRecipe(id: string): Promise<void> {
         await this.getConnection()
         .delete()

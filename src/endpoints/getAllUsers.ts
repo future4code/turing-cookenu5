@@ -1,4 +1,5 @@
 import { Request, Response } from 'express';
+import { BaseDatabase } from '../data/BaseDatabase';
 import { UserDatabase } from '../data/UserDatabase';
 import { Authenticator } from '../services/Authenticator';
 
@@ -29,5 +30,7 @@ export const getAllUsers = async (req: Request, res: Response) => {
     res.status(400).send({
       message: e.message
     })
+  } finally {
+    BaseDatabase.destroyConnection();
   }
 }
