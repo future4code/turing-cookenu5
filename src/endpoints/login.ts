@@ -39,7 +39,7 @@ export const login = async (req: Request, res: Response) => {
     const refreshToken = authenticator.generateToken({
       id: user.id,
       device: userData.device
-    }, process.env.ACCESS_TOKEN_EXPIRES_IN)
+    }, process.env.REFRESH_TOKEN_EXPIRES_IN)
 
     const refreshTokenDatabase = new RefreshTokenDatabase();
     const refreshTokenFromDatabase = await refreshTokenDatabase.getRefreshTokenByIdAndDevice(user.id, userData.device);

@@ -43,14 +43,9 @@ export const signUp = async (req: Request, res: Response) => {
     const refreshTokenDatabase = new RefreshTokenDatabase();
     await refreshTokenDatabase.createRefreshToken(refreshToken, userData.device, true, id);
 
-    const token = authenticator.generateToken({
-      id,
-      role: userData.role
-    })
-
     res.status(200).send({
       message: 'User created successfully',
-      token,
+      accessToken,
       refreshToken
     })
 
