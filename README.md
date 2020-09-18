@@ -10,7 +10,7 @@
 - Criar receita
 - Pegar receita
 - Seguir usuário
-- ~~Deixar de seguir usuário~~
+- Deixar de seguir usuário
 - Pegar feed de receitas
 - Editar receita
 - Deletar receita
