@@ -11,6 +11,8 @@ import { getProfile } from './endpoints/getProfile';
 import { deleteUser } from './endpoints/deleteUser';
 import { deleteRecipe } from './endpoints/deleteRecipe';
 import { refreshToken } from './endpoints/refreshToken';
+import { getFeed } from './endpoints/getFeed';
+import { getRecipe } from './endpoints/getRecipe';
 
 
 dotenv.config();
@@ -23,12 +25,14 @@ app.post('/user/signup', signUp);
 app.post('/user/login', login);
 app.post('/user/refresh', refreshToken);
 app.get('/user/profile', getProfile);
+app.get('/user/feed', getFeed);
 app.get('/user/:id', getUser);
+app.get('/recipes/:recipeId', getRecipe);
 
 app.post('/user/recipe', createRecipe);
 app.post('/user/follow', fallowUser);
 
-app.delete('/user/:id/:recipeId/delete', deleteRecipe);
+app.delete('/user/:id/recipes/:recipeId/delete', deleteRecipe);
 app.delete('/user/:id/delete', deleteUser);
 
 const server = app.listen(process.env.PORT || 3000, () => {

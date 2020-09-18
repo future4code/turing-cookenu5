@@ -1,6 +1,7 @@
 import {Request, Response} from 'express';
 import { UserDatabase } from '../data/UserDatabase';
 import { Authenticator } from '../services/Authenticator';
+import { BaseDatabase } from '../data/BaseDatabase';
 
 export const refreshToken = async ( req: Request, resp: Response): Promise<any> =>{
     try{
@@ -23,7 +24,9 @@ export const refreshToken = async ( req: Request, resp: Response): Promise<any> 
         })
 
         resp.status(200).send(accessToken);
-    }catch(error){
+    } catch(error){
         resp.status(400).send(error);
+    } finally {
+        BaseDatabase.destroyConnection();
     }
 }
