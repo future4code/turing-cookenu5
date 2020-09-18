@@ -14,6 +14,7 @@ import { refreshToken } from './endpoints/refreshToken';
 import { getFeed } from './endpoints/getFeed';
 import { getRecipe } from './endpoints/getRecipe';
 import { unfollowUser } from './endpoints/unfollowUser';
+import FollowingDatabase from './data/FollowingDatabase';
 
 dotenv.config();
 
@@ -35,7 +36,7 @@ app.get('/user/:id', getUser);
 
 app.post('/user/:id/recipe', createRecipe);
 
-app.delete('/user/:id/unfollow/:followingId', unfollowUser);
+app.delete('/user/:id/unfollow', unfollowUser);
 app.delete('/user/:id/recipes/:recipeId/delete', deleteRecipe);
 app.delete('/user/:id/delete', deleteUser);
 

@@ -26,7 +26,7 @@ export const deleteUser = async (req: Request, res: Response) => {
     await recipeDatabase.deleteAllUserRecipes(userData.id);
 
     const followingDatabase = new FollowingDatabase();
-    await followingDatabase.deleteUserFollowing(userData.id);
+    await followingDatabase.deleteAllUserFollowing(userData.id);
 
     const userDatabase = new UserDatabase();
     await userDatabase.deleteUser(userData.id);

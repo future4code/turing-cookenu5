@@ -6,9 +6,14 @@ export default class FollowingDatabase extends BaseDatabase{
     private static TABLE_RECIPES = 'recipes';
     private static TABLE_USERS = 'cookenu_users';
     
-    async fallowUser(user_id: string, following_user_id: string){
-        await this.getConnection()
-        .insert({ user_id, following_user_id }).into(this.table);
+    async fallowUser(id: string, user_id: string, following_user_id: string){
+        try {
+            await this.getConnection()
+            .insert({ id, user_id, following_user_id }).into(this.table);
+
+        } catch(err) {
+            console.log(err.message)
+        }
     }
 
     async getFollowingById(id: string): Promise<any> {
@@ -25,10 +30,11 @@ export default class FollowingDatabase extends BaseDatabase{
         .raw(`
             SELECT *
             FROM ${this.table}
-            WHERE user_id = ${userId}
-            AND following_user_id = ${followingUserId}
+            WHERE user_id = "${userId}"
+            AND following_user_id = "${followingUserId}"
         `)
-        return result[0]
+        console.log(result[0][0])
+        return result[0][0]
     }
 
     async getFeedById(id: string): Promise<any> {
@@ -45,7 +51,17 @@ export default class FollowingDatabase extends BaseDatabase{
         return result[0]
     }
 
-    async deleteUserFollowing(id: string): Promise<void> {
+    async deleteUserFollowing(userId: string, followingUserId: string): Promise<void> {
+        await this.getConnection()
+        .raw(`
+            DELETE FROM ${this.table}
+            WHERE user_id = "${userId}"
+            AND following_user_id = "${followingUserId}"
+        `)
+        console.log("deleted")
+    }
+
+    async deleteAllUserFollowing(id: string): Promise<void> {
         await this.getConnection()
         .delete()
         .from(this.table)

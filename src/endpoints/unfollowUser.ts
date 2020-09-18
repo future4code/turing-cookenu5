@@ -9,8 +9,8 @@ export const unfollowUser = async (req: Request, res: Response) => {
   try{
 
     const userData = {
-      id: req.params.id,
-      followingId: req.params.id,
+        user_id: req.params.id,
+        following_user_id: req.body.following_user_id,
     }
 
     const token = req.headers.authorization as string;
@@ -18,17 +18,17 @@ export const unfollowUser = async (req: Request, res: Response) => {
     const authenticator = new Authenticator();
     const authenticationData = authenticator.getData(token);
 
-    if(!authenticationData) {
-        throw new Error('Unathorized operation')
-    }
+    // if(!authenticationData) {
+    //     throw new Error('Unathorized operation')
+    // }
 
     const followingDatabase = new FollowingDatabase()
-    
-    if(followingDatabase.checkFollowingRelation(userData.id, userData.followingId)) {
-        throw new Error ("You're not following this user")
-    }
 
-    await followingDatabase.deleteUserFollowing(userData.followingId);
+    // if(!followingDatabase.checkFollowingRelation(userData.user_id, userData.following_user_id)) {
+    //     throw new Error ("You're not following this user")
+    // }
+
+    await followingDatabase.deleteUserFollowing(userData.user_id, userData.following_user_id)
 
     res.status(200).send({
         message: "You are not following this user anymore"
