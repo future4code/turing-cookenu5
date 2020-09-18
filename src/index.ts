@@ -27,11 +27,13 @@ app.post('/user/login', login);
 app.post('/user/refresh', refreshToken);
 app.get('/user/profile', getProfile);
 app.get('/user/feed', getFeed);
-app.get('/user/:id', getUser);
-app.get('/recipes/:recipeId', getRecipe);
-
 app.post('/user/recipe', createRecipe);
 app.post('/user/follow', fallowUser);
+
+app.get('/recipes/:recipeId', getRecipe);
+
+app.get('/user/:id', getUser);
+
 app.post('/user/:id/unfollow', unfollowUser);
 
 app.delete('/user/:id/recipes/:recipeId/delete', deleteRecipe);
