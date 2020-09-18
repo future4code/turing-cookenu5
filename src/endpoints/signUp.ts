@@ -1,5 +1,6 @@
 import { Request, Response }  from 'express';
 import { BaseDatabase } from '../data/BaseDatabase';
+import { RefreshTokenDatabase } from '../data/RefreshTokenDatabase';
 import { UserDatabase } from '../data/UserDatabase';
 import { Authenticator } from '../services/Authenticator';
 import { HashManager } from '../services/HashManager';
@@ -11,7 +12,8 @@ export const signUp = async (req: Request, res: Response) => {
       name: req.body.name,
       email: req.body.email,
       password: req.body.password,
-      role: req.body.role
+      role: req.body.role,
+      device: req.body.device
     }
 
     if(!userData.name || !userData.email || !userData.password || !userData.role) {
@@ -28,14 +30,23 @@ export const signUp = async (req: Request, res: Response) => {
     await userDatabase.createUser(id, userData.name, userData.email, hashedPassword, userData.role);
 
     const authenticator = new Authenticator();
-    const token = authenticator.generateToken({
+    const accessToken = authenticator.generateToken({
       id, 
       role: userData.role
-    })
+    }, "15s")
+
+    const refreshToken = authenticator.generateToken({
+      id,
+      device: userData.device
+    }, "2y")
+
+    const refreshTokenDatabase = new RefreshTokenDatabase();
+    await refreshTokenDatabase.createRefreshToken(refreshToken, userData.device, true, id);
 
     res.status(200).send({
       message: 'User created successfully',
-      token
+      accessToken,
+      refreshToken
     })
 
   } catch(e){
