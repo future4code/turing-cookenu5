@@ -15,7 +15,6 @@ import { getFeed } from './endpoints/getFeed';
 import { getRecipe } from './endpoints/getRecipe';
 import { unfollowUser } from './endpoints/unfollowUser';
 
-
 dotenv.config();
 
 const app = express();
