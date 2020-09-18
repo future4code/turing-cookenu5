@@ -14,7 +14,6 @@ import { refreshToken } from './endpoints/refreshToken';
 import { getFeed } from './endpoints/getFeed';
 import { getRecipe } from './endpoints/getRecipe';
 import { unfollowUser } from './endpoints/unfollowUser';
-import FollowingDatabase from './data/FollowingDatabase';
 
 dotenv.config();
 
@@ -48,4 +47,3 @@ const server = app.listen(process.env.PORT || 3000, () => {
     console.error('Failure upon starting server')
   }
 });
-

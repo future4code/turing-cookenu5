@@ -33,7 +33,6 @@ export default class FollowingDatabase extends BaseDatabase{
             WHERE user_id = "${userId}"
             AND following_user_id = "${followingUserId}"
         `)
-        console.log(result[0][0])
         return result[0][0]
     }
 

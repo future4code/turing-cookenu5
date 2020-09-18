@@ -25,9 +25,11 @@ export const fallowUser = async (req: Request, res: Response): Promise<any> =>{
                 throw new Error ("You can't follow yourself, because it is weird. Go find some new friends")
             }
 
-            // if(db.checkFollowingRelation(followingData.user_id, followingData.following_user_id)) {
-            //     throw new Error ("You're already following this user. Did you forget?")
-            // }
+            const isFollowing = await db.checkFollowingRelation(followingData.user_id, followingData.following_user_id)
+    
+            if(isFollowing) {
+                throw new Error ("You're already following this user. Did you forget?")
+            }
 
             const idGenerator = new IdGenerator();
             const id = idGenerator.generateId();

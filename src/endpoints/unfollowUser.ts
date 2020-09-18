@@ -18,15 +18,17 @@ export const unfollowUser = async (req: Request, res: Response) => {
     const authenticator = new Authenticator();
     const authenticationData = authenticator.getData(token);
 
-    // if(!authenticationData) {
-    //     throw new Error('Unathorized operation')
-    // }
+    if(!authenticationData) {
+        throw new Error('Unathorized operation')
+    }
 
     const followingDatabase = new FollowingDatabase()
-
-    // if(!followingDatabase.checkFollowingRelation(userData.user_id, userData.following_user_id)) {
-    //     throw new Error ("You're not following this user")
-    // }
+    
+    const isFollowing = await followingDatabase.checkFollowingRelation(userData.user_id, userData.following_user_id)
+    
+    if(!isFollowing) {
+        throw new Error ("You're not following this user")
+    }
 
     await followingDatabase.deleteUserFollowing(userData.user_id, userData.following_user_id)
 
