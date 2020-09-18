@@ -8,6 +8,8 @@ import { getUser } from './endpoints/getUser';
 import { createRecipe } from './endpoints/createRecipe';
 import {fallowUser} from './endpoints/followUser'
 import { getProfile } from './endpoints/getProfile';
+import { deleteUser } from './endpoints/deleteUser';
+import { deleteRecipe } from './endpoints/deleteRecipe';
 
 
 dotenv.config();
@@ -23,7 +25,10 @@ app.get('/user/:id', getUser);
 
 app.post('/user/recipe', createRecipe);
 
-app.post('/user/follow', fallowUser)
+app.post('/user/follow', fallowUser);
+
+app.delete('/user/:id/:recipeId/delete', deleteRecipe);
+app.delete('/user/:id/delete', deleteUser);
 
 const server = app.listen(process.env.PORT || 3000, () => {
   if(server) {
