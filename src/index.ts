@@ -10,6 +10,7 @@ import {fallowUser} from './endpoints/followUser'
 import { getProfile } from './endpoints/getProfile';
 import { deleteUser } from './endpoints/deleteUser';
 import { deleteRecipe } from './endpoints/deleteRecipe';
+import { refreshToken } from './endpoints/refreshToken';
 
 
 dotenv.config();
@@ -20,11 +21,11 @@ app.use(express.json());
 app.get('/users', getAllUsers);
 app.post('/user/signup', signUp);
 app.post('/user/login', login);
+app.post('/user/refresh', refreshToken);
 app.get('/user/profile', getProfile);
 app.get('/user/:id', getUser);
 
 app.post('/user/recipe', createRecipe);
-
 app.post('/user/follow', fallowUser);
 
 app.delete('/user/:id/:recipeId/delete', deleteRecipe);
