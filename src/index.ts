@@ -21,21 +21,22 @@ dotenv.config();
 const app = express();
 app.use(express.json());
 
-app.get('/users', getAllUsers);
 app.post('/user/signup', signUp);
 app.post('/user/login', login);
 app.post('/user/refresh', refreshToken);
+
+app.get('/users', getAllUsers);
 app.get('/user/profile', getProfile);
 app.get('/user/feed', getFeed);
-app.post('/user/recipe', createRecipe);
-app.post('/user/follow', fallowUser);
+
+app.post('/user/:id/follow', fallowUser);
 
 app.get('/recipes/:recipeId', getRecipe);
-
 app.get('/user/:id', getUser);
 
-app.post('/user/:id/unfollow', unfollowUser);
+app.post('/user/:id/recipe', createRecipe);
 
+app.delete('/user/:id/unfollow/:followingId', unfollowUser);
 app.delete('/user/:id/recipes/:recipeId/delete', deleteRecipe);
 app.delete('/user/:id/delete', deleteUser);
 

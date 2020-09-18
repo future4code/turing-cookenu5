@@ -4,14 +4,27 @@ import Knex from 'knex';
 export  class RecipeDatabase extends BaseDatabase{
     private  table: string = "recipes"
     
-    async createRecipe(id: string, name: string, recipe_description: string, creation_date: string){
+    async createRecipe(
+        id: string, 
+        name: string, 
+        recipe_description: string, 
+        creation_date: string,
+        creator_id: string
+    ) {
         try{
-            await this.getConnection().insert({id, name, recipe_description, creation_date}).into(this.table);
+            await this.getConnection().insert({
+                id, 
+                name, 
+                recipe_description, 
+                creation_date,
+                creator_id
+            })
+            .into(this.table);
 
         }catch(error){
             throw new Error(error)
 
-        }finally{
+        } finally{
             BaseDatabase.destroyConnection();
         }
     }

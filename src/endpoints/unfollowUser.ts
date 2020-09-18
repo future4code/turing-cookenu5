@@ -10,6 +10,7 @@ export const unfollowUser = async (req: Request, res: Response) => {
 
     const userData = {
       id: req.params.id,
+      followingId: req.params.id,
     }
 
     const token = req.headers.authorization as string;
@@ -21,8 +22,13 @@ export const unfollowUser = async (req: Request, res: Response) => {
         throw new Error('Unathorized operation')
     }
 
-    const followingDatabase = new FollowingDatabase();
-    await followingDatabase.deleteUserFollowing(userData.id);
+    const followingDatabase = new FollowingDatabase()
+    
+    if(followingDatabase.checkFollowingRelation(userData.id, userData.followingId)) {
+        throw new Error ("You're not following this user")
+    }
+
+    await followingDatabase.deleteUserFollowing(userData.followingId);
 
     res.status(200).send({
         message: "You are not following this user anymore"

@@ -20,6 +20,17 @@ export default class FollowingDatabase extends BaseDatabase{
         return result[0]
     }
 
+    async checkFollowingRelation(userId: string, followingUserId: string): Promise<any> {
+        const result = await this.getConnection()
+        .raw(`
+            SELECT *
+            FROM ${this.table}
+            WHERE user_id = ${userId}
+            AND following_user_id = ${followingUserId}
+        `)
+        return result[0]
+    }
+
     async getFeedById(id: string): Promise<any> {
         const result = await this.getConnection().raw(`
         SELECT f.user_id, f.following_user_id, c.name, r.name, r.recipe_description, r.creation_date
@@ -34,15 +45,6 @@ export default class FollowingDatabase extends BaseDatabase{
         return result[0]
     }
 
-    async deleteFollowingById(id: string): Promise<any> {
-        const result = await this.getConnection()
-        .select('following_user_id')
-        .from(this.table)
-        .where({id})
-
-        return result[0]
-    }
-    
     async deleteUserFollowing(id: string): Promise<void> {
         await this.getConnection()
         .delete()
