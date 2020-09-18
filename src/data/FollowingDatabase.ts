@@ -1,6 +1,5 @@
 import { BaseDatabase } from "./BaseDatabase";
 
-
 export default class FollowingDatabase extends BaseDatabase{
     private table: string = "following" 
     private static TABLE_RECIPES = 'recipes';
