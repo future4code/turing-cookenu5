@@ -9,9 +9,9 @@
 - Pegar perfil de outro usuário
 - Criar receita
 - Pegar receita
-- ~~Seguir usuário~~
+- Seguir usuário
 - ~~Deixar de seguir usuário~~
-- ~~Pegar feed de receitas~~
+- Pegar feed de receitas
 - Editar receita
 - Deletar receita
 - Deletar conta
