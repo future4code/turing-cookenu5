@@ -15,7 +15,6 @@ import { getFeed } from './endpoints/getFeed';
 import { getRecipe } from './endpoints/getRecipe';
 import { unfollowUser } from './endpoints/unfollowUser';
 
-
 dotenv.config();
 
 const app = express();
@@ -36,7 +35,7 @@ app.get('/user/:id', getUser);
 
 app.post('/user/:id/recipe', createRecipe);
 
-app.delete('/user/:id/unfollow/:followingId', unfollowUser);
+app.delete('/user/:id/unfollow', unfollowUser);
 app.delete('/user/:id/recipes/:recipeId/delete', deleteRecipe);
 app.delete('/user/:id/delete', deleteUser);
 
@@ -48,4 +47,3 @@ const server = app.listen(process.env.PORT || 3000, () => {
     console.error('Failure upon starting server')
   }
 });
-
